@@ -17,4 +17,5 @@ $app->get('/', function () use ($app) {
 
 $app->group(['prefix' => 'api/v1', 'namespace' => 'Api\V1'], function () use ($app) {
     $app->get('units', 'UnitsController@index');
+    $app->get('units/{id}', 'UnitsController@show');
 });

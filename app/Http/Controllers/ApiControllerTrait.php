@@ -58,6 +58,14 @@ trait ApiControllerTrait
         return response()->json($results);
     }
 
+    public function show($id)
+    {
+        $result = $this->model
+            ->with($this->relationships())
+            ->findOrFail($id);
+        return response()->json($result);
+    }
+
 
     protected function relationships()
     {
