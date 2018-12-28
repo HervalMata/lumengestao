@@ -20,4 +20,5 @@ $app->group(['prefix' => 'api/v1', 'namespace' => 'Api\V1'], function () use ($a
     $app->get('units/{id}', 'UnitsController@show');
     $app->post('units', 'UnitsController@store');
     $app->put('units/{id}', 'UnitsController@update');
+    $app->delete('units/{id}', 'UnitsController@destroy');
 });

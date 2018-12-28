@@ -80,6 +80,12 @@ trait ApiControllerTrait
         return response()->json($result);
     }
 
+    public function destroy($id)
+    {
+        $result = $this->model->findOrFail($id);
+        $result->delete();
+        return response()->json($result);
+    }
 
     protected function relationships()
     {
