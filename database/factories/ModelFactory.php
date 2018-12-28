@@ -27,12 +27,11 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     $unit = factory(\App\Models\Unit::class)->create();
 
     return [
-        'enrolment' => str_random(4)->unique(),
+        'enrolment' => str_random(4),
         'name' => $faker->name,
         'email' => $faker->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'password' => $password ?: $password = app('hash')->make('secret'),
         'api_token' => str_random(32),
         'unit_id' => $unit->id,
-        'remember_token' => str_random(10),
     ];
 });

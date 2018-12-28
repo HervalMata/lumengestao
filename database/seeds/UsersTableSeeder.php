@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         factory(\App\Models\User::class)->create([
             'enrolment' => 'oooo',
-            'password' => bcrypt('admin')
+            'password' => app('hash')->make('admin')
         ]);
 
         factory(\App\Models\User::class, 100)->create();
