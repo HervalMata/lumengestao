@@ -11,9 +11,28 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Unit::class, function (Faker\Generator $faker) {
+
     return [
+        'name' => $faker->unique()->word,
+        'sector' => $faker->word,
+        'state' => collect(\App\Models\State::$states)->random(),
+        'city' => $faker->city,
+    ];
+});
+
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+    static $password;
+
+    $unit = factory(\App\Models\Unit::class)->create();
+
+    return [
+        'enrolment' => str_random(4)->unique(),
         'name' => $faker->name,
-        'email' => $faker->email,
+        'email' => $faker->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
+        'api_token' => str_random(32),
+        'unit_id' => $unit->id,
+        'remember_token' => str_random(10),
     ];
 });
